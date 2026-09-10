@@ -1,0 +1,95 @@
+{
+  "schema": "digital-sovereignty-reference-profiles/v1",
+  "profiles": [
+    {
+      "id": "healthcare-country-a",
+      "compute_plane": {
+        "provider_id": "global-ai-provider",
+        "compute_jurisdiction": "FOREIGN",
+        "runtime_evidence_digest": "runtime-ok"
+      },
+      "authority_plane": {
+        "authority_jurisdiction": "COUNTRY-A",
+        "policy_epoch": 184,
+        "minimum_jurisdiction_evidence_items": 2,
+        "minimum_independent_evidence_issuers": 2,
+        "require_authority_jurisdiction_assertion": true
+      },
+      "candidate_act": {
+        "effect_class": "storage-write",
+        "destination": "National-Hospital-EHR",
+        "purpose": "Clinical-Treatment",
+        "scope": ["WRITE:/records"],
+        "sink_id": "Hospital-EHR-Finality-Sink",
+        "boundary_id": "Hospital-EHR-Write-Boundary",
+        "freshness_ns": 10000000000
+      },
+      "payload_constraints": {
+        "required_fields": ["patient_id", "operation", "diagnosis", "clinician_id", "consent"],
+        "operation": ["append-diagnosis"],
+        "consent": ["present"]
+      }
+    },
+    {
+      "id": "disaster-country-b",
+      "compute_plane": {
+        "provider_id": "global-ai-provider",
+        "compute_jurisdiction": "FOREIGN",
+        "runtime_evidence_digest": "runtime-ok"
+      },
+      "authority_plane": {
+        "authority_jurisdiction": "COUNTRY-B",
+        "policy_epoch": 73,
+        "minimum_jurisdiction_evidence_items": 2,
+        "minimum_independent_evidence_issuers": 2,
+        "require_authority_jurisdiction_assertion": true
+      },
+      "candidate_act": {
+        "effect_class": "network-egress",
+        "destination": "National-Telecom-Emergency-Gateway",
+        "purpose": "Flood-Emergency-Warning",
+        "scope": ["SEND"],
+        "sink_id": "National-Alert-Finality-Sink",
+        "boundary_id": "National-Alert-Dispatch-Boundary",
+        "freshness_ns": 600000000000
+      },
+      "payload_constraints": {
+        "required_fields": ["region", "hazard", "severity", "message_class"],
+        "hazard": ["flood", "cyclone", "earthquake", "wildfire"],
+        "severity": ["severe", "extreme"],
+        "message_class": ["public-warning"]
+      }
+    },
+    {
+      "id": "public-benefit-country-c",
+      "compute_plane": {
+        "provider_id": "global-ai-provider",
+        "compute_jurisdiction": "FOREIGN",
+        "runtime_evidence_digest": "runtime-ok"
+      },
+      "authority_plane": {
+        "authority_jurisdiction": "COUNTRY-C",
+        "policy_epoch": 118,
+        "minimum_jurisdiction_evidence_items": 2,
+        "minimum_independent_evidence_issuers": 2,
+        "require_authority_jurisdiction_assertion": true
+      },
+      "candidate_act": {
+        "effect_class": "payment-ledger",
+        "destination": "Domestic-Payment-Rail",
+        "purpose": "Flood-Relief",
+        "scope": ["SETTLE"],
+        "sink_id": "Treasury-Payment-Finality-Sink",
+        "boundary_id": "Treasury-Settlement-Boundary",
+        "freshness_ns": 30000000000
+      },
+      "payload_constraints": {
+        "required_fields": ["recipient", "amount_minor", "currency", "program", "purpose"],
+        "amount_minor": {"minimum": 1, "maximum": 100000},
+        "currency": ["LCU"],
+        "program": ["National-Relief-2026"],
+        "purpose": ["Flood-Relief"]
+      }
+    }
+  ]
+}

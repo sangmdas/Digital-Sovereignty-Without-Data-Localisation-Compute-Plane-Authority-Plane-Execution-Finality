@@ -1,0 +1,75 @@
+{
+  "schema": "execution-finality-reference-benchmark-v2",
+  "environment": {
+    "captured_at_utc": "2026-09-10T04:16:43.086754+00:00",
+    "python": "3.13.5",
+    "python_implementation": "CPython",
+    "python_unicode_data": "15.1.0",
+    "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+    "kernel_release": "6.18.35",
+    "machine": "x86_64",
+    "processor_reported_by_platform": null,
+    "cpu_model_from_proc": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cpu_vendor_from_proc": "GenuineIntel",
+    "logical_cpu_count_visible": 5,
+    "process_cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "memory_total_bytes_visible": 6236925952,
+    "libc": {
+      "name": "glibc",
+      "version": "2.41"
+    },
+    "sqlite": "3.46.1",
+    "openssl": "OpenSSL 3.5.5 27 Jan 2026",
+    "node": "v22.16.0",
+    "node_unicode_data": "16.0",
+    "node_icu": "77.1",
+    "go": "go version go1.23.2 linux/amd64",
+    "go_unicode_data_recorded": "15.0.0 (Go 1.23.2 unicode.Version in the recorded environment)",
+    "go_vendored_x_text": "v0.16.0",
+    "pytest": "9.0.2",
+    "pytest_cov": "7.0.0",
+    "coverage": "7.13.3",
+    "cryptography": "46.0.4",
+    "setuptools": "82.0.1",
+    "environment_note": "Values describe the execution container visible to the benchmark. CPU model may identify the underlying or virtualized host CPU; no bare-metal, frequency, NUMA, cache, governor, isolation, or dedicated-accelerator claim is inferred."
+  },
+  "iterations": 3000,
+  "warmup_iterations": 1000,
+  "clock": "time.perf_counter_ns",
+  "measurements": {
+    "canonical_sha256": {
+      "n": 3000,
+      "mean_us": 14.416158666666666,
+      "p50_us": 9.367,
+      "p95_us": 15.001,
+      "p99_us": 136.139,
+      "min_us": 8.382,
+      "max_us": 2352.345
+    },
+    "sink_verify_only": {
+      "n": 3000,
+      "mean_us": 348.326587,
+      "p50_us": 247.295,
+      "p95_us": 846.533,
+      "p99_us": 2251.67,
+      "min_us": 228.594,
+      "max_us": 4712.515
+    },
+    "authority_plus_sink_effectuation": {
+      "n": 3000,
+      "mean_us": 1724.3208100000002,
+      "p50_us": 1392.473,
+      "p95_us": 3190.025,
+      "p99_us": 5217.848,
+      "min_us": 1170.792,
+      "max_us": 11344.872
+    }
+  },
+  "warning": "User-space Python reference numbers are illustrative, not certified latency guarantees. Hardware/native deployments require independent measurement on the actual target stack."
+}

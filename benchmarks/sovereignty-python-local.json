@@ -1,0 +1,105 @@
+{
+  "schema": "digital-sovereignty-authority-plane-benchmark-v1",
+  "environment": {
+    "captured_at_utc": "2026-09-10T04:17:08.443395+00:00",
+    "python": "3.13.5",
+    "python_implementation": "CPython",
+    "python_unicode_data": "15.1.0",
+    "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+    "kernel_release": "6.18.35",
+    "machine": "x86_64",
+    "processor_reported_by_platform": null,
+    "cpu_model_from_proc": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "cpu_vendor_from_proc": "GenuineIntel",
+    "logical_cpu_count_visible": 5,
+    "process_cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "memory_total_bytes_visible": 6236925952,
+    "libc": {
+      "name": "glibc",
+      "version": "2.41"
+    },
+    "sqlite": "3.46.1",
+    "openssl": "OpenSSL 3.5.5 27 Jan 2026",
+    "node": "v22.16.0",
+    "node_unicode_data": "16.0",
+    "node_icu": "77.1",
+    "go": "go version go1.23.2 linux/amd64",
+    "go_unicode_data_recorded": "15.0.0 (Go 1.23.2 unicode.Version in the recorded environment)",
+    "go_vendored_x_text": "v0.16.0",
+    "pytest": "9.0.2",
+    "pytest_cov": "7.0.0",
+    "coverage": "7.13.3",
+    "cryptography": "46.0.4",
+    "setuptools": "82.0.1",
+    "environment_note": "Values describe the execution container visible to the benchmark. CPU model may identify the underlying or virtualized host CPU; no bare-metal, frequency, NUMA, cache, governor, isolation, or dedicated-accelerator claim is inferred."
+  },
+  "scenario": "public-benefit-country-c / authenticated governance inputs",
+  "timing_boundary": "Evidence collection, remote attestation acquisition, policy retrieval, issuer-side signing, and Candidate/approval construction are outside the timed authority/sink hot path. Authority-plane measurements include evidence/approval signature verification, sovereignty policy evaluation, governance-context binding verification, core protected authorization, protected state transition, validation-evidence commitment, and capability issuance. Full measurements additionally include Finality-Sink verification, in-memory single-use claim, guarded payment-effector commit, and receipt signing.",
+  "iterations": 3000,
+  "warmup_iterations": 1000,
+  "clock": "time.perf_counter_ns",
+  "parameters": {
+    "authority_jurisdiction": "COUNTRY-C",
+    "compute_jurisdiction": "FOREIGN",
+    "compute_provider": "global-ai-provider",
+    "policy_epoch": 118,
+    "evidence_items": 2,
+    "independent_evidence_issuers": 2,
+    "approval_threshold": 1,
+    "required_approval_roles": [
+      "policy-owner"
+    ],
+    "authenticated_evidence": true,
+    "authenticated_approvals": true,
+    "candidate_freshness_ns": 30000000000,
+    "capability_ttl_ns": 5000000000,
+    "max_future_skew_ns": 1000000000,
+    "consumption_store": "InMemoryConsumptionStore",
+    "reference_authentication": "HMAC-SHA256"
+  },
+  "measurements": {
+    "sovereignty_policy_validate_only": {
+      "n": 3000,
+      "mean_us": 304.59665500000006,
+      "p50_us": 268.888,
+      "p95_us": 398.625,
+      "p99_us": 857.174,
+      "min_us": 242.259,
+      "max_us": 3787.451
+    },
+    "authenticated_authority_plane_issue": {
+      "n": 3000,
+      "mean_us": 1380.2425323333332,
+      "p50_us": 1277.62,
+      "p95_us": 1772.662,
+      "p99_us": 3422.113,
+      "min_us": 1126.847,
+      "max_us": 7333.355
+    },
+    "sink_verify_only_after_sovereignty_issue": {
+      "n": 3000,
+      "mean_us": 319.2269273333334,
+      "p50_us": 286.229,
+      "p95_us": 426.248,
+      "p99_us": 801.706,
+      "min_us": 266.749,
+      "max_us": 4532.866
+    },
+    "authenticated_authority_plus_sink_effectuation": {
+      "n": 3000,
+      "mean_us": 2208.4610143333334,
+      "p50_us": 2041.926,
+      "p95_us": 2764.387,
+      "p99_us": 5133.023,
+      "min_us": 1858.339,
+      "max_us": 19013.185
+    }
+  },
+  "warning": "These are user-space CPython reference measurements, not certified or production latency guarantees. They do not include remote evidence acquisition, WAN round trips, real TPM/TEE/GPU/RATS verification, durable database/ledger commit latency, or production network/device I/O."
+}

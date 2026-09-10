@@ -1,0 +1,1271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude"
+     category="info"
+     docName="draft-das-digital-sovereignty-finality-01"
+     ipr="trust200902"
+     submissionType="IETF"
+     tocInclude="true"
+     tocDepth="3"
+     symRefs="true"
+     sortRefs="true"
+     version="3">
+
+  <front>
+    <title abbrev="Digital Sovereignty Without Data Localisation">
+      When Data Leaves Its Originating Jurisdiction, Who Controls It?
+      Digital Sovereignty Without Data Localisation by Separating the Compute Plane from the Authority Plane
+    </title>
+
+    <seriesInfo name="Internet-Draft" value="draft-das-digital-sovereignty-finality-01"/>
+
+    <author fullname="Sangam Das" initials="S." surname="Das">
+      <organization>Independent Inventor</organization>
+      <address>
+        <postal>
+          <street>Present Address: Kolkata, West Bengal, India</street>
+          <street>Permanent Address: Balasore, Odisha, India</street>
+          <city>Kolkata</city>
+          <region>West Bengal</region>
+          <country>India</country>
+        </postal>
+        <email>info@sangamdas.com</email>
+      </address>
+    </author>
+
+    <date year="2026" month="August" day="30"/>
+
+    <area>Security</area>
+    <abstract>
+      <t>
+        Consider a simple case: data concerning U.S. citizens is processed in infrastructure located
+        outside the United States.  The foreign jurisdiction may have its own lawful-access, surveillance,
+        disclosure, retention, or national-security rules.  Even where contractual commitments, privacy
+        policies, regional settings, or enterprise agreements specify how that data should be handled,
+        the infrastructure executing the workload may ultimately operate under legal and technical
+        authority outside the originating jurisdiction.
+      </t>
+      <t>
+        The same problem applies in reverse to European, Indian, Japanese, Canadian, Australian, or
+        other data processed through globally distributed infrastructure.
+      </t>
+      <t>
+        This creates a deeper architectural problem than ordinary data localisation.
+      </t>
+      <t>
+        If control over data automatically follows the physical location of compute, then moving
+        computation across borders can also move practical authority over the resulting data, operations,
+        and disclosures.  Privacy may be the first concern, but the same architectural dependency can
+        later affect economic security, critical infrastructure, sensitive enterprise information,
+        government workloads, and national security.
+      </t>
+      <t>
+        This is where policy alone begins to reach its limit.
+      </t>
+      <t>
+        Contracts, privacy policies, adequacy mechanisms, access-control rules, cloud-region settings,
+        and audit requirements remain important.  However, they primarily describe what an actor is
+        permitted or expected to do.  They do not necessarily create a technical condition that prevents
+        a prohibited external effect from occurring in the first place.
+      </t>
+      <t>
+        Although this document uses the term "digital sovereignty," it does not attempt to standardize
+        national policy, determine which jurisdiction's law should prevail, or prescribe where data must
+        be stored.  Its focus is technical: defining an interoperable mechanism by which deployment-selected
+        policy and trust inputs can be bound to a specific Candidate Act and enforced at the effectuation
+        boundary before that act becomes externally effective.  In this document, "sovereignty" therefore
+        refers to retained execution authority, not to the standardization of geopolitical or regulatory policy.
+      </t>
+      <t>
+        The architecture described here addresses this problem through a different model of digital
+        sovereignty: separate the Compute Plane from the Authority Plane.
+      </t>
+      <t>
+        The Compute Plane may remain globally distributed.  Data may be stored, transformed, analysed,
+        routed, or processed using infrastructure located in another jurisdiction.  The architecture
+        therefore does not require that all data remain physically local, nor does it assume that
+        sovereign computing requires complete national isolation from global cloud, telecom, AI, or
+        platform infrastructure.
+      </t>
+      <t>
+        Instead, the Authority Plane remains independently governed.  A remote compute environment may
+        perform computation, but computation alone does not grant authority to produce a protected
+        external consequence.
+      </t>
+      <t>
+        A proposed cross-jurisdiction operation is represented as a Candidate Act and remains in a
+        Non-Effective State until the required policy, identity, purpose, destination, jurisdiction,
+        runtime, revocation, and other applicable predicates have been validated.
+      </t>
+      <t>
+        Protected validation may produce a LAVR or equivalent validation commitment and a scoped Finality
+        Authority bound to the particular Candidate Act.  At the relevant Finality Sink — the first point
+        at which the protected operation would become externally effective — the authority is independently
+        verified.  Only after successful verification and appropriate consumption or reservation of that
+        authority may the external effect occur.
+      </t>
+      <t>
+        The resulting model is therefore: Compute Anywhere -&gt; Authority Remains Independently Governed
+        -&gt; Candidate Act -&gt; Protected Validation -&gt; Scoped Finality Authority -&gt; Finality-Sink
+        Verification -&gt; External Effect.
+      </t>
+      <t>
+        If the required authority is missing, stale, revoked, mismatched, replayed, or inconsistent with
+        the governing jurisdictional policy: No Valid Authority -&gt; No Protected External Effect.
+      </t>
+      <t>
+        This permits a form of digital sovereignty without mandatory data localisation.  A jurisdiction,
+        enterprise, regulated institution, or other authorised policy owner does not necessarily need to
+        operate every processor, cloud region, network, or AI system that performs the computation.
+        Instead, it can retain technical control over the conditions under which specified externally
+        effective acts are permitted.
+      </t>
+      <t>
+        The architecture therefore separates two questions that are commonly treated as one: Where is the
+        computation performed?  Who has authority over the resulting external effect?  Those questions
+        need not have the same answer.
+      </t>
+      <t>
+        A U.S. workload could execute outside the United States while specified sensitive external effects
+        remain subject to U.S.-controlled or enterprise-controlled authorization conditions.  An EU
+        workload could similarly use infrastructure outside a particular Member State while retaining
+        independently governed finality requirements.
+      </t>
+      <t>
+        The same mechanism could apply to India, Japan, Singapore, Australia, Canada, multinational
+        enterprises, sovereign clouds, regulated industries, or private data spaces.  The architecture
+        does not prescribe which country's policy should prevail and does not attempt to resolve conflicts
+        of law.
+      </t>
+      <t>
+        Its contribution is narrower and technical: cross-border computation does not have to imply
+        cross-border surrender of execution authority.
+      </t>
+      <t>
+        This turns digital sovereignty from a primarily location-centred concept into an authority-centred
+        execution model.  The objective is not to fragment the Internet or exclude global technology
+        providers.
+      </t>
+      <t>
+        On the contrary, separating the Compute Plane from the Authority Plane could allow hyperscale
+        cloud providers, AI platforms, telecom operators, CDNs, satellite networks, and other global
+        infrastructure providers to continue supplying efficient distributed computation while supporting
+        stronger jurisdiction-specific, enterprise-specific, or regulated execution guarantees.
+      </t>
+      <t>
+        In this model, sovereignty does not require saying that the data must never leave.  It can instead
+        mean: the computation may occur elsewhere, but this protected external effect cannot occur without
+        the required authority.
+      </t>
+      <t>
+        That is the central architectural proposition of this document.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+
+    <section numbered="true" toc="include">
+      <name>Introduction</name>
+      <t>
+        Consider data concerning persons, enterprises, public bodies, or regulated workloads that
+        originates in one jurisdiction but is processed through infrastructure located in another.
+        The receiving jurisdiction may impose its own lawful-access, disclosure, retention,
+        cybersecurity, surveillance, national-security, or regulatory requirements.  The same
+        structural problem can arise regardless of whether the originating jurisdiction is the
+        United States, a Member State of the European Union, India, Japan, Singapore, Canada,
+        Australia, or another jurisdiction.
+      </t>
+      <t>
+        The resulting problem is broader than data localisation.  If practical control over protected
+        data automatically follows the physical or logical location of compute, cross-border
+        computation can also move practical authority over disclosures, transmissions, tool calls,
+        model outputs, replication, or other externally effective consequences.
+      </t>
+      <t>
+        The architectural proposition in this document is that cross-border computation need not imply
+        cross-border surrender of execution authority.
+      </t>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Why Policy Alone Is Not an Execution Boundary</name>
+      <t>
+        Law, contracts, privacy policies, data-processing agreements, organisational controls, cloud
+        configuration, IAM, routing policy, encryption, monitoring, and audit remain indispensable.
+        The issue addressed here is not whether those mechanisms matter.  The issue is that a rule
+        describing what an actor is permitted or expected to do is not necessarily identical to a
+        technical boundary that prevents a prohibited protected effect from occurring.
+      </t>
+      <t>
+        This distinction becomes increasingly important as automated systems acquire greater
+        computational capability, autonomy, tool access, parallelism, and speed.  AI systems and
+        software agents can select tools, call APIs, manipulate files, trigger workflows, initiate
+        communications, operate through multiple services, and create externally effective actions at
+        machine speed.  Human review, contractual enforcement, or post-hoc audit can remain useful,
+        but those mechanisms do not by themselves provide complete mediation at the point of effect.
+      </t>
+      <t>
+        The intended security principle is therefore:
+      </t>
+      <blockquote>
+        <t>Policy remains indispensable, but policy is not complete mediation.</t>
+      </blockquote>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Digital Sovereignty Without Mandatory Data Localisation</name>
+      <t>
+        The proposed model separates the location of computation from the location of authority.
+        The Compute Plane may remain globally distributed, while the Authority Plane can remain
+        independently governed by a provider, enterprise, regulated institution, sovereign-cloud
+        operator, trust service, public authority, or a multi-party combination selected by policy.
+      </t>
+
+      <section numbered="true" toc="include">
+        <name>Compute Plane</name>
+        <t>
+          The Compute Plane may store, transform, analyse, route, infer, execute, or otherwise process
+          data using infrastructure located in one or more jurisdictions.  A deployment is not required
+          to treat physical localisation of all computation as the sole mechanism for digital sovereignty.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Authority Plane</name>
+        <t>
+          The Authority Plane determines whether a protected Candidate Act is authorised to become
+          externally effective.  Compute can prepare an action, but compute alone does not necessarily
+          possess final authority to effectuate that action.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Core Separation</name>
+        <t>
+          The model separates two questions:
+        </t>
+        <ul spacing="normal">
+          <li>Where is the computation performed?</li>
+          <li>Who has authority over the resulting protected external effect?</li>
+        </ul>
+        <t>
+          Those questions need not have the same answer.
+        </t>
+      </section>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Execution-Finality Architecture</name>
+
+      <section numbered="true" toc="include">
+        <name>Candidate Act</name>
+        <t>
+          A proposed protected cross-boundary operation is represented as a Candidate Act.  Load-bearing
+          attributes can include source identity, protected object or payload reference, requested
+          operation, purpose, destination, jurisdictional context, policy identifier, security epoch,
+          runtime state, and other deployment-defined predicates.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Non-Effective State</name>
+        <t>
+          A Candidate Act remains in a Non-Effective State while required validation is performed.
+          Computation, preparation, serialization, inference, encryption, or routing preparation may
+          occur without yet granting authority for the protected external effect.
+        </t>
+        <t>
+          The architectural invariant is:
+        </t>
+        <blockquote>
+          <t>Computation is not authority.</t>
+        </blockquote>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Protected Enforcement Domain</name>
+        <t>
+          A Protected Enforcement Domain, or PED, evaluates deployment-selected predicates.  Such
+          predicates can include identity, purpose, destination, policy, jurisdiction, runtime state,
+          security epoch, revocation, freshness, replay status, and protected platform state.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Protected Validation Evidence and LAVR</name>
+        <t>
+          Successful validation can produce protected validation evidence.  A LAVR can commit to the
+          Candidate Act and relevant validation state before, or in protected coordination with,
+          effectuation.  The LAVR is not intended to be merely a post-hoc audit log.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Scoped Finality Authority</name>
+        <t>
+          Successful protected validation can enable issuance of a scoped Finality Authority.  The
+          authority can be bound to the Candidate Act, destination, purpose, policy, epoch, Finality
+          Sink, protected identity, revocation state, and bounded-use or single-use conditions.
+        </t>
+        <t>
+          High-assurance implementations can make the authority non-bearer such that possession of an
+          artifact alone is insufficient to exercise the authority from an arbitrary context.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Finality Sink</name>
+        <t>
+          The Finality Sink is the first usable release or effectuation boundary at which the protected
+          external consequence can become effective.  It is a functional role and need not correspond
+          to one specific physical component.
+        </t>
+        <t>
+          Examples can include a cloud egress controller, telecom gateway, external API boundary,
+          satellite gateway, storage replication boundary, inter-region transfer boundary, or another
+          protected release point.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Finality-Sink Verification</name>
+        <t>
+          The Finality Sink verifies that the Finality Authority remains valid for the Candidate Act
+          that is actually about to become externally effective.  Verification can include Candidate-Act
+          binding, destination, purpose, policy, jurisdiction, security epoch, revocation, sink scope,
+          replay state, and consumption state.
+        </t>
+        <t>
+          Where appropriate, the sink can reconstruct load-bearing Candidate-Act attributes rather than
+          relying solely on an upstream assertion.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Consumption or Reservation Before Effectuation</name>
+        <t>
+          A bounded authority should not remain reusable after enabling a protected external effect.
+          High-assurance implementations can durably consume or reserve authority before, or atomically
+          with, commitment of the external effect.
+        </t>
+        <t>
+          A conceptual lifecycle can be represented as:
+        </t>
+        <blockquote>
+          <t>ISSUED -&gt; ARMED -&gt; COMMITTING -&gt; EFFECT-COMMITTED -&gt; CONSUMED</t>
+        </blockquote>
+        <t>
+          The security property is more important than the state names: crashes, retries, concurrency,
+          or replay should not convert one bounded authority into unintended additional effects.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Fail-Closed Behaviour</name>
+        <t>
+          Where strict enforcement is selected, failure of a required finality predicate leaves the
+          Candidate Act non-effective.  Failures can include missing authority, invalid binding, policy
+          mismatch, destination mismatch, stale epoch, revocation, jurisdictional evidence failure,
+          replay, sink mismatch, or unavailable required evidence.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Anti-Bypass Closure</name>
+        <t>
+          Finality enforcement is ineffective if a protected external effect can use an alternate
+          unmediated path.  Every release path capable of producing the protected externally effective
+          consequence therefore needs to terminate at the same Finality Sink or at an equivalent
+          protected enforcement boundary.
+        </t>
+        <t>
+          Potential bypass paths can include alternate network interfaces, file export, IPC, shared
+          memory, storage replication, vendor HALs, accelerator paths, secondary gateways, external APIs,
+          or other deployment-specific channels.
+        </t>
+      </section>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Jurisdiction and Location Evidence</name>
+      <t>
+        The architecture does not assume that a cloud-region label, IP geolocation result, GNSS reading,
+        or any single signal constitutes infallible proof of physical jurisdiction.
+      </t>
+
+      <section numbered="true" toc="include">
+        <name>Declared or Network-Derived Evidence</name>
+        <ul spacing="normal">
+          <li>Cloud-region identity</li>
+          <li>Routing domain</li>
+          <li>Service-region metadata</li>
+          <li>IP or network geolocation assertions</li>
+          <li>Gateway identity</li>
+          <li>VPC or network context</li>
+        </ul>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Protected or Independently Verifiable Evidence</name>
+        <ul spacing="normal">
+          <li>Hardware attestation</li>
+          <li>Protected platform identity</li>
+          <li>Trusted time</li>
+          <li>Serving-network or PLMN evidence</li>
+          <li>Gateway or facility attestation</li>
+          <li>Protected infrastructure topology</li>
+          <li>Radio-derived observations where applicable</li>
+          <li>Satellite-related observations where applicable</li>
+        </ul>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Cryptographic Binding, Not Cryptographic Geography</name>
+        <t>
+          Cryptography does not itself prove physical location.  It can bind the evidence that was
+          evaluated, the Candidate Act, the applicable policy, the validating environment, the
+          destination, the security epoch, and the resulting authorization.
+        </t>
+        <blockquote>
+          <t>
+            Protected evidence concerning jurisdiction, execution state, and destination can be
+            cryptographically bound to the authorization decision that governs the external effect.
+          </t>
+        </blockquote>
+      </section>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Governance Model</name>
+      <t>
+        The mechanism is jurisdiction-neutral and does not require a single governance model.
+        Authority can be held by an infrastructure provider, enterprise customer, regulated
+        institution, sovereign-cloud operator, trust service, public authority, or a multi-party
+        combination.
+      </t>
+
+      <section numbered="true" toc="include">
+        <name>Single-Authority Deployment</name>
+        <t>
+          A single policy authority can define the predicates that must be satisfied before a protected
+          Candidate Act is authorised.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Multi-Party or Co-Signed Deployment</name>
+        <t>
+          A high-assurance deployment can require policy authorization from more than one entity.
+          For example, an infrastructure provider and a regulated enterprise or sovereign authority
+          can jointly define or authorize the protected policy bundle.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Protocol Neutrality</name>
+        <t>
+          The mechanism does not determine which jurisdiction's law should prevail, whether a specific
+          transfer is lawful, or which governmental or private entity should control a policy.  Those
+          questions remain legal, contractual, organisational, and political matters outside the
+          protocol mechanism.
+        </t>
+      </section>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Machine-Verifiable Finality Receipts</name>
+      <t>
+        A Finality Sink can produce protected evidence describing an authorization or denial result and
+        the corresponding effectuation state.  Such evidence can commit to the Candidate Act, policy
+        version, validation state, Finality Sink identity, authorization result, consumption state,
+        and effectuation result.
+      </t>
+      <t>
+        Verifiability does not require globally public disclosure of sensitive transfer metadata.
+        Deployments can use selective disclosure, encrypted receipts, permissioned logs, cryptographic
+        commitments, protected audit systems, or other privacy-preserving verification techniques.
+      </t>
+    </section>
+
+    <section anchor="latency-feasibility" numbered="true" toc="include">
+      <name>Technical Clarification: Latency, Legacy Deployment, and Historical Feasibility</name>
+
+      <t>
+        A likely deployment concern is whether cryptographic validation, protected-state transitions,
+        attestation, and independently governed authorization introduce unacceptable latency for
+        cloud, telecom, AI-agent, storage, CDN, or high-throughput network systems.  This concern is
+        valid if the architecture is implemented as a synchronous remote approval service placed in
+        the critical path of every packet or every internal computation.
+      </t>
+      <t>
+        That is not the intended performance model.
+      </t>
+      <blockquote>
+        <t>
+          The architecture separates expensive trust establishment from the local finality decision,
+          and it applies finality to protected externally effective acts rather than blindly
+          re-authorizing every packet or intermediate computation.
+        </t>
+      </blockquote>
+
+      <section numbered="true" toc="include">
+        <name>The Performance Principle: Do Not Put a WAN Round Trip in Every Effect</name>
+        <t>
+          A design that requires a remote governmental, enterprise, or provider authorization server
+          to answer synchronously for every packet, storage write, AI model token, or tool-dispatch
+          step will not scale across many high-throughput systems.  Network round-trip time,
+          availability coupling, queueing, and remote-service failure would dominate the finality
+          decision.
+        </t>
+        <t>
+          The scalable construction separates a cold path from a hot path.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Cold Path: Expensive Operations Are Amortized</name>
+        <t>
+          Operations that are comparatively expensive, infrequent, or dependent on remote trust
+          services SHOULD occur outside the per-effect hot path where the selected security model
+          permits.  Examples include:
+        </t>
+        <ul spacing="normal">
+          <li>remote platform attestation;</li>
+          <li>certificate-chain construction and validation;</li>
+          <li>policy retrieval and signature validation;</li>
+          <li>trust-anchor establishment;</li>
+          <li>key provisioning or key rotation;</li>
+          <li>registration of Finality Sinks and Protected Enforcement Domains;</li>
+          <li>jurisdiction-evidence source registration;</li>
+          <li>negotiation of supported cryptographic suites;</li>
+          <li>establishment of a policy epoch;</li>
+          <li>revocation-state synchronization; and</li>
+          <li>creation of bounded, protected local validation state derived from the currently
+          authorized policy.</li>
+        </ul>
+        <t>
+          Such state MUST remain constrained by the policy, epoch, destination classes, permitted
+          purposes, revocation conditions, sink identity, and other applicable limits.  Amortization
+          MUST NOT silently convert an act-scoped finality decision into an unrestricted bearer
+          credential.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Hot Path: Keep the Finality Decision Local and Compact</name>
+        <t>
+          Immediately before a protected external effect, the hot path can be reduced to operations
+          that are suitable for local execution at or adjacent to the Finality Sink.  Depending on the
+          deployment, the hot path can include:
+        </t>
+        <ul spacing="normal">
+          <li>canonicalization of the load-bearing Candidate-Act attributes;</li>
+          <li>calculation or verification of a compact Candidate-Act digest;</li>
+          <li>verification of LAVR binding or equivalent protected validation evidence;</li>
+          <li>verification of the scoped Finality Authority;</li>
+          <li>local comparison of destination, purpose, jurisdiction, policy epoch, and sink scope;</li>
+          <li>local revocation or freshness checks against synchronized protected state;</li>
+          <li>replay-state lookup;</li>
+          <li>durable consume-or-reserve transition; and</li>
+          <li>commit of the authorized external effect.</li>
+        </ul>
+        <t>
+          The performance objective is therefore not zero cryptographic cost.  The objective is to
+          eliminate unnecessary remote dependency from the critical effectuation path and to keep
+          per-effect work bounded, local, hardware-accelerable, and proportional to the protected act.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Finality Is Per Protected Effect, Not Necessarily Per Packet</name>
+        <t>
+          The architecture does not require an independent sovereign authorization transaction for
+          every Ethernet frame, IP packet, QUIC packet, storage block, model token, or CPU instruction.
+          The protected object is the externally effective Candidate Act defined by the deployment.
+        </t>
+        <t>
+          For example, the protected act can be creation of an outbound cross-jurisdiction flow,
+          release of a protected dataset, invocation of a foreign API with protected content, creation
+          of a replication relationship, dispatch of an agentic tool operation, or another
+          security-relevant release event.
+        </t>
+        <t>
+          Once a specifically authorized effect has entered a protected committed state, ordinary
+          packetization or transport of that already-authorized effect need not repeat the complete
+          policy-validation procedure for every packet, provided that transport cannot be substituted,
+          redirected, expanded, or repurposed beyond the authority that was validated.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Large Payloads Need Not Be Rehashed in Full on the Critical Path</name>
+        <t>
+          A Candidate-Act commitment does not necessarily require rereading and hashing an entire
+          multi-gigabyte or multi-terabyte object immediately before egress.  Where integrity of the
+          payload is relevant, the architecture can bind to a protected content digest, object version,
+          immutable storage identifier, Merkle root, authenticated manifest, or equivalent integrity
+          value that was maintained by the protected storage or processing path.
+        </t>
+        <t>
+          The Finality Sink can then verify the load-bearing commitment and the relationship between
+          that commitment and the object being released.  The integrity mechanism must prevent an
+          attacker from substituting a different object after authorization.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Public-Key Cryptography Need Not Dominate Every Hot-Path Decision</name>
+        <t>
+          Public-key signatures are useful at trust, policy, delegation, attestation, and
+          cross-administrative-domain boundaries.  An implementation need not perform a complete remote
+          attestation exchange and full certificate-chain validation for every protected act.
+        </t>
+        <t>
+          A validated policy epoch and protected local state can allow subsequent act-bound decisions
+          to use compact cryptographic verification appropriate to the negotiated security profile.
+          Implementations can also use hardware acceleration for hashing, authenticated encryption,
+          public-key verification, secure key handling, and protected state management.
+        </t>
+        <t>
+          The protocol should therefore remain cryptographically agile rather than prescribing one
+          expensive operation for every deployment.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Receipts Should Not Block the Effect Unless Policy Requires It</name>
+        <t>
+          Generation of a machine-verifiable finality receipt is logically distinct from remote
+          publication or regulatory ingestion of that receipt.  The Finality Sink can create or commit
+          the protected evidence locally as part of the effectuation transaction while transmission,
+          indexing, aggregation, or auditor retrieval occurs asynchronously.
+        </t>
+        <t>
+          A deployment that requires synchronous external notarization can select that stronger model,
+          but such a requirement is not inherent to the base architecture.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Legacy Deployment Profile</name>
+        <t>
+          Existing systems can deploy a software-mediated Finality Sink in an egress proxy, service
+          mesh gateway, API gateway, host networking layer, hypervisor boundary, storage gateway, or
+          telecom control element without immediately replacing all underlying hardware.
+        </t>
+        <t>
+          A software-only deployment can provide useful policy binding, act scoping, replay protection,
+          durable state, and receipts.  Its assurance is lower if a privileged administrator or
+          compromised host can bypass that software path.
+        </t>
+        <t>
+          The architecture should therefore distinguish deployment assurance profiles rather than
+          claiming that a legacy software gateway and a hardware-enforced non-bypassable boundary
+          provide identical guarantees.
+        </t>
+        <t>
+          A migration path can be represented as:
+        </t>
+        <blockquote>
+          <t>
+            Software gateway -&gt; hypervisor or confidential-compute enforcement -&gt;
+            hardware-assisted I/O enforcement -&gt; protected sink-local finality
+          </t>
+        </blockquote>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Approximately Ten Years Ago: Technically Possible, Operationally Heavy</name>
+        <t>
+          Around 2016, the basic ingredients for parts of this architecture already existed:
+          hardware-assisted symmetric cryptography, TPMs, HSMs, secure boot, emerging processor
+          enclaves, programmable network appliances, and conventional policy engines.
+        </t>
+        <t>
+          A protected finality mechanism was therefore technically possible for selected high-value,
+          relatively low-rate operations such as financial authorization, key release, controlled
+          database export, or dedicated gateway enforcement.
+        </t>
+        <t>
+          The limiting factors were not an absence of cryptography.  The practical limitations were
+          integration cost, limited enclave capacity and deployment maturity, centralized policy
+          services, less pervasive hardware offload, fewer standardized confidential-computing
+          abstractions, weaker support for protected I/O paths, and the operational difficulty of
+          placing strong mediation directly into general-purpose cloud and network data paths.
+        </t>
+        <t>
+          A universal per-act finality layer across hyperscale distributed infrastructure would
+          therefore have been substantially more difficult and expensive to deploy than a specialized
+          high-value transaction gate.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Approximately Five Years Ago: Practical for Selected Cloud and Confidential-Compute Workloads</name>
+        <t>
+          By approximately 2021, confidential-computing services, cloud attestation, hardware-isolated
+          enclaves, SR-IOV-based I/O virtualization, programmable SmartNICs, increasingly capable
+          service-mesh and policy infrastructure, and stronger cloud key-management integration made
+          protected local enforcement materially more deployable.
+        </t>
+        <t>
+          This period made it practical to separate an untrusted or less-trusted host environment from
+          a protected validation environment for selected workloads.  It also made attestation-backed
+          key release and protected processing available as commercial cloud capabilities rather than
+          only specialized laboratory or appliance designs.
+        </t>
+        <t>
+          Important constraints remained: heterogeneous hardware support, enclave memory and I/O
+          limitations on some platforms, remote-attestation complexity, cross-cloud interoperability,
+          and the cost of placing public-key or remote-service operations directly in very high-rate
+          hot paths.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Current High-End Hardware: Move Enforcement Closer to the I/O Boundary</name>
+        <t>
+          Contemporary server and network platforms provide architectural options that were less
+          mature or less widely deployable a decade ago.  These include integrated cryptographic
+          accelerators, hardware roots of trust, confidential-computing environments, larger protected
+          memory domains, hardware-assisted network and storage encryption, SmartNICs and DPUs capable
+          of inline security processing, high-speed DMA and SR-IOV paths, and protected key storage
+          adjacent to network or storage interfaces.
+        </t>
+        <t>
+          These capabilities allow an implementation to move parts of finality verification away from
+          a centralized software service and toward the host, DPU, NIC, gateway, secure processor, or
+          other component that already participates in the I/O path.
+        </t>
+        <t>
+          Current hardware does not make cryptographic validation free, and it does not eliminate the
+          need for benchmarking.  It changes the engineering question from whether protected
+          enforcement is possible at all to where the enforcement state should reside, which operations
+          belong on the hot path, which operations can be amortized, and which assurance profile is
+          appropriate for the workload.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Illustrative Technology Evolution Is Not a Protocol Dependency</name>
+        <t>
+          Commercial examples of this broader evolution include cloud confidential-computing
+          environments, hardware-isolated enclave services, integrated server cryptographic
+          accelerators, hardware I/O offload systems, modern DPUs and SmartNICs with inline
+          cryptographic capabilities, and Arm confidential-computing mechanisms.
+        </t>
+        <t>
+          These examples demonstrate feasibility trends; they are not normative dependencies.  The
+          protocol architecture must remain implementable across multiple processor vendors, cloud
+          providers, network technologies, accelerators, operating systems, and jurisdictions.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Why AI Changes the Latency Discussion</name>
+        <t>
+          Accelerated AI and agentic systems do not merely increase compute performance.  They can
+          increase the rate at which software proposes consequential actions.  A model can generate
+          tool calls, API operations, file actions, communications, code execution, retrieval requests,
+          cross-agent messages, and other Candidate Acts faster than a human governance loop can review
+          each act individually.
+        </t>
+        <t>
+          The response should not be to place a human or remote policy server synchronously in every
+          action path.  The scalable response is to compile or distribute authorized policy into
+          protected machine-verifiable state and enforce the selected invariant at the local
+          effectuation boundary.
+        </t>
+        <blockquote>
+          <t>
+            Faster computation increases the need for a faster enforcement boundary; it does not
+            justify removing the enforcement boundary.
+          </t>
+        </blockquote>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Latency Budget Should Be Measured by Component</name>
+        <t>
+          A conforming implementation should report latency separately for the major components rather
+          than publishing one undifferentiated "cryptographic overhead" number.  Useful measurements
+          include:
+        </t>
+        <ul spacing="normal">
+          <li>Candidate-Act canonicalization and digest cost;</li>
+          <li>policy lookup cost;</li>
+          <li>protected-state transition cost;</li>
+          <li>Finality Authority verification cost;</li>
+          <li>revocation and replay-state lookup cost;</li>
+          <li>durable consume-or-reserve cost;</li>
+          <li>Finality-Sink processing cost;</li>
+          <li>receipt commitment cost;</li>
+          <li>cold-path attestation and policy-establishment cost; and</li>
+          <li>incremental end-to-end latency relative to the same effect without finality enforcement.</li>
+        </ul>
+        <t>
+          Measurements should distinguish software-only, TEE-assisted, accelerator-assisted, DPU or
+          SmartNIC-assisted, and other hardware-enforced deployment profiles.  Throughput, tail latency,
+          failure behaviour, recovery cost, and concurrency should be reported in addition to average
+          latency.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>Target Engineering Invariant</name>
+        <t>
+          The intended performance-security compromise can be stated compactly:
+        </t>
+        <blockquote>
+          <t>
+            Remote trust establishment MAY be amortized.  Protected finality verification MUST remain
+            bound to the actual Candidate Act at the effectuation boundary.
+          </t>
+        </blockquote>
+        <t>
+          Moving expensive operations off the hot path is an optimization.  Moving the final
+          act-to-effect binding off the protected effectuation boundary would weaken the security
+          property that the architecture is intended to provide.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>What the Architecture Does Not Claim About Performance</name>
+        <t>
+          The architecture does not claim zero overhead, universal sub-millisecond latency, identical
+          performance on legacy and hardware-assisted systems, or suitability for every packet of every
+          Internet flow.
+        </t>
+        <t>
+          Performance depends on the cryptographic suite, hardware, protected-state mechanism, storage
+          durability model, policy complexity, failure model, network topology, and definition of the
+          Candidate Act.  Concrete latency claims require implementation-specific benchmarks.
+        </t>
+        <t>
+          The architectural claim is narrower: modern systems provide sufficient local cryptographic,
+          trusted-computing, and I/O-offload capability to make pre-effectuation enforcement a practical
+          engineering option for selected high-consequence acts without requiring a remote policy
+          round trip for every effect.
+        </t>
+      </section>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Technical FAQ and Adversarial Review</name>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 1: Why Is Law, Contract, and Audit Not Sufficient?</name>
+        <t>
+          Those mechanisms remain essential because they define obligations, accountability, remedies,
+          and governance.  They are not always equivalent to a machine-level invariant that prevents a
+          prohibited protected effect before it occurs.  The architecture adds a technical enforcement
+          point rather than attempting to replace law or contract.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 2: Why Is This More Important in the AI Era?</name>
+        <t>
+          Automated systems can perform large numbers of consequential operations at machine speed,
+          including tool calls, API invocation, file manipulation, model-driven workflow execution,
+          agent-to-agent interaction, and parallel actions.  The gap between policy review speed and
+          execution speed therefore becomes more significant.  Machine-speed action benefits from
+          machine-speed enforcement at the effectuation boundary.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 3: Is IAM or OAuth Already the Authorization Layer?</name>
+        <t>
+          IAM and OAuth commonly authorize principals, sessions, scopes, resources, or classes of API
+          operations.  Finality authorization addresses whether a particular protected Candidate Act,
+          with specific purpose, destination, jurisdiction, policy, runtime state, and epoch, may become
+          externally effective.  Existing IAM and OAuth mechanisms can remain upstream inputs.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 4: Why Not Use DLP, CASB, Firewalls, or VPC Egress Rules?</name>
+        <t>
+          Those controls can be strong and can provide important predicates.  The additional requirement
+          is to bind the actual protected Candidate Act to a scoped finality decision at the first usable
+          effectuation boundary.  The contribution is therefore not another firewall rule; it is the
+          binding of Candidate Act, protected validation, scoped authority, and effectuation.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 5: Why Is Encryption Alone Not Sufficient?</name>
+        <t>
+          Encryption protects confidentiality while data remains unavailable to unauthorized parties.
+          It does not govern every externally effective consequence after legitimate decryption,
+          computation, inference, or transformation.  Finality governs whether the protected effect is
+          authorised, while encryption protects the payload and transport.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 6: How Can Digital Sovereignty Exist Without Data Localisation?</name>
+        <t>
+          The model separates compute location from execution authority.  Computation can occur in a
+          foreign or distributed environment while selected protected external effects remain subject
+          to independently governed authorization conditions.
+        </t>
+        <blockquote>
+          <t>Cross-border computation does not have to imply cross-border surrender of execution authority.</t>
+        </blockquote>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 7: Can the Architecture Override Foreign Law?</name>
+        <t>
+          No.  The architecture does not resolve conflicts of law or invalidate sovereign legal powers.
+          It provides a technical mechanism by which a deployment can require selected conditions before
+          a covered external effect occurs.  A jurisdiction can still regulate, prohibit, compel, or
+          otherwise affect the deployment through law.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 8: Who Controls the Authority Plane?</name>
+        <t>
+          Control is deployment-defined.  It can reside with a provider, enterprise, regulated entity,
+          sovereign-cloud operator, trust service, public authority, or multi-party combination.
+          Standardization can define representation, scoping, verification, consumption, and failure
+          behaviour without deciding which actor deserves authority.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 9: How Can Jurisdiction Be Reliably Determined?</name>
+        <t>
+          No single location signal is assumed to be universally trustworthy.  High-assurance deployments
+          can combine multiple evidence classes and define an evidence threshold through policy.
+          Cryptography binds the evaluated evidence to the authorization decision; it does not transform
+          weak evidence into physical truth.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 10: What Prevents Replay of a Valid Finality Authority?</name>
+        <t>
+          The authority can be bound to the Candidate Act, destination, purpose, policy, security epoch,
+          Finality Sink, protected identity, nonce, and consumption state.  Sink-side verification and
+          durable consumption or reservation prevent a captured authorization from functioning as a
+          generic reusable bearer credential.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 11: How Is Time-of-Check to Time-of-Use Avoided?</name>
+        <t>
+          Finality-Sink verification occurs at the boundary where the protected effect becomes possible.
+          Load-bearing Candidate-Act attributes can be reconstructed or revalidated at that boundary.
+          Material changes in destination, purpose, policy epoch, payload identity, or protected state
+          invalidate authority issued for a different act.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 12: What Happens During Crashes, Retries, or Parallel Agent Execution?</name>
+        <t>
+          A bounded authority can be durably reserved or consumed before, or atomically with, effect
+          commitment.  The implementation must ensure that concurrency, retries, failover, or crashes
+          cannot transform one bounded authority into multiple unintended externally effective actions.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 13: What Prevents Bypass Through Another Egress Path?</name>
+        <t>
+          The architecture requires anti-bypass closure for protected effects.  Alternate network
+          interfaces, file exports, IPC paths, shared memory, storage replication, vendor HALs,
+          accelerator paths, secondary gateways, or equivalent release channels must terminate at the
+          same Finality Sink or an equivalent protected enforcement boundary.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 14: Why Are Logs and Post-Hoc Audit Not Enough?</name>
+        <t>
+          Logs are valuable for accountability, forensic analysis, incident response, and regulatory
+          review.  A log records or proves an event that may already have become irreversible.  Finality
+          addresses prevention at the effectuation boundary.  Receipts and logs remain complementary
+          evidence after the pre-effectuation decision.
+        </t>
+      </section>
+
+      <section numbered="true" toc="include">
+        <name>FAQ 15: Why Is This Particularly Relevant to Agentic AI?</name>
+        <t>
+          Agentic systems can collapse part of the traditional separation between decision-making and
+          execution by selecting tools, composing operations, invoking APIs, manipulating resources,
+          initiating communications, and coordinating with other agents.  As autonomy and computational
+          capability increase above the enforcement boundary, deterministic and independently governed
+          finality below that boundary becomes more important for high-consequence effects.
+        </t>
+        <blockquote>
+          <t>Intelligence may remain probabilistic.  Execution authority does not have to be.</t>
+        </blockquote>
+      </section>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Comparison with Predominantly Policy-Centred Enforcement</name>
+      <t>
+        A simplified policy-centred sequence can be represented as:
+      </t>
+      <blockquote>
+        <t>Policy -&gt; Configuration -&gt; Effect -&gt; Audit</t>
+      </blockquote>
+      <t>
+        The execution-finality sequence is instead:
+      </t>
+      <blockquote>
+        <t>
+          Candidate Act -&gt; Non-Effective State -&gt; Protected Validation -&gt;
+          Scoped Finality Authority -&gt; Finality-Sink Verification -&gt;
+          Consume or Reserve -&gt; External Effect
+        </t>
+      </blockquote>
+      <t>
+        The difference is not the removal of policy.  The difference is making selected policy
+        predicates a technical precondition of the protected effect.
+      </t>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Benefits to Global Cloud, Telecom, and Platform Providers</name>
+      <t>
+        The architecture is not intended to be anti-cloud, anti-platform, anti-American, anti-European,
+        or anti-global-compute.  It can provide an additional capability for infrastructure providers
+        serving customers subject to differing sovereignty and regulatory requirements.
+      </t>
+      <t>
+        Potential use cases include stronger sovereign-cloud assurances, independently verifiable
+        residency controls, regulated-industry infrastructure, confidential-computing integration,
+        machine-verifiable compliance evidence, enterprise policy enforcement, multi-cloud governance,
+        telecom interconnection, satellite systems, and cross-domain AI execution.
+      </t>
+      <t>
+        In such deployments, the infrastructure provider can continue supplying globally distributed
+        compute while the customer or another designated authority retains control over selected
+        externally effective operations.
+      </t>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Residual Trust Boundary</name>
+      <t>
+        The architecture does not eliminate all trust assumptions.  A Protected Enforcement Domain can
+        depend on processor hardware, firmware, secure boot, trusted execution environments, attestation
+        infrastructure, certificate authorities, vendor signing systems, and key-management systems.
+      </t>
+      <t>
+        Failure or compromise at those layers can weaken higher-level assurance.  This is a general
+        trusted-computing-base problem and is not specific to one vendor or jurisdiction.
+      </t>
+      <t>
+        Execution-finality therefore addresses authority and effectuation at a selected enforcement
+        boundary; it does not by itself solve semiconductor sovereignty, fabrication sovereignty, or
+        every root-of-trust problem.
+      </t>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Threat Model</name>
+      <t>
+        Relevant threats include misconfiguration, malicious or compromised workloads, excessive
+        privilege, confused-deputy behaviour, replay, stale authority, destination substitution,
+        policy substitution, jurisdiction-evidence manipulation, compromised agents, tool misuse,
+        alternate egress paths, concurrency races, crash-retry duplication, and compromised components
+        inside the trusted computing base.
+      </t>
+      <t>
+        The architecture does not assume that all infrastructure operators are malicious.  It is intended
+        to reduce the amount of discretionary trust required for selected protected effects.
+      </t>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Security Considerations</name>
+      <t>
+        Security depends on correct Candidate-Act canonicalization, protected predicate evaluation,
+        integrity of policy distribution, authority scoping, revocation, freshness, sink verification,
+        durable consumption state, anti-replay protection, anti-bypass closure, and the integrity of the
+        trusted computing base.
+      </t>
+      <t>
+        An implementation that validates an operation upstream but permits unmediated effectuation
+        through another path does not satisfy the intended complete-mediation property.
+      </t>
+      <t>
+        Cryptographic binding must not be presented as proof that the underlying physical, geographic,
+        hardware, or legal assertions are inherently true.  Assurance is bounded by the quality of the
+        evidence sources and the trustworthiness of the components producing them.
+      </t>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Privacy Considerations</name>
+      <t>
+        Jurisdiction evidence, workload identity, destination information, policy identifiers, and
+        finality receipts can themselves reveal sensitive information.  Implementations should minimize
+        retained metadata and can use selective disclosure, pseudonymous identifiers, encrypted evidence,
+        cryptographic commitments, permissioned verification, or other privacy-preserving mechanisms.
+      </t>
+      <t>
+        The architecture should not require unnecessary publication of individual transfer events or
+        sensitive infrastructure topology.
+      </t>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Authority Plane and Existing Trust Infrastructure</name>
+      <t>
+        The Authority Plane is not intended to replace IAM, OAuth, GNAP, RATS, EAT, PKI, attestation
+        infrastructure, policy engines, or existing cryptographic trust mechanisms.  Those mechanisms
+        answer important but different questions and can provide inputs to the Authority Plane.
+      </t>
+      <t>
+        IAM, OAuth, OAuth Token Exchange, GNAP, and related authorization systems can establish identity,
+        delegation, resource access, scopes, roles, or other upstream authorization context.  RATS, EAT,
+        and related attestation mechanisms can provide evidence concerning the identity, integrity,
+        configuration, or protected state of a workload, Protected Enforcement Domain, Finality Sink,
+        or related execution environment.  Policy systems can determine which jurisdictional,
+        organizational, contractual, security, purpose, destination, or operational conditions apply.
+      </t>
+      <t>
+        The Authority Plane can consume these inputs.  Its narrower function is to determine whether,
+        given the applicable identity, authorization, attestation, policy, runtime, destination,
+        jurisdictional, freshness, revocation, and other required inputs, a particular Candidate Act is
+        permitted to become externally effective.
+      </t>
+      <t>
+        The Authority Plane therefore provides the architectural point at which upstream trust and
+        authorization inputs can be combined into an act-scoped finality decision.  The Finality Sink
+        performs the later effectuation-boundary check: it verifies that the resulting authority remains
+        valid for the Candidate Act that is actually about to become externally effective.
+      </t>
+      <blockquote>
+        <t>Existing trust and authorization mechanisms can establish relevant inputs.  The Authority Plane
+        binds those inputs to the particular Candidate Act, and the Finality Sink verifies that binding
+        at the effectuation boundary.</t>
+      </blockquote>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Relationship to Existing IETF Protocols and Future Protocol Realization</name>
+      <t>
+        The architecture described in this document is intended to compose with, rather than replace,
+        existing IETF security, authorization, attestation, representation, and cryptographic mechanisms.
+      </t>
+      <t>
+        Remote-attestation mechanisms, including architectures based on RATS and EAT, can provide evidence
+        concerning the identity, integrity, configuration, or protected state of a Protected Enforcement
+        Domain or related execution environment.  Such evidence can serve as an input to protected
+        validation.  Attestation evidence alone, however, does not necessarily constitute authority for
+        a particular Candidate Act to become externally effective.
+      </t>
+      <t>
+        OAuth, OAuth Token Exchange, GNAP, enterprise IAM, or equivalent authorization systems can provide
+        upstream identity, delegation, resource, scope, or policy context.  Such mechanisms can participate
+        in policy derivation or authority establishment.  Execution finality adds a narrower act-to-effect
+        binding: authorization is associated with the particular Candidate Act and is revalidated at the
+        Finality Sink before the protected external effect is committed.
+      </t>
+      <t>
+        Concrete protocol realizations can use existing IETF representation and cryptographic mechanisms,
+        including CBOR, CDDL, and COSE, to encode and protect Candidate Acts, validation evidence, scoped
+        Finality Authorities, and Finality Receipts.  Transport-specific profiles can subsequently define
+        integration with HTTP, RPC, messaging, telecom, storage, or other protocol environments.
+      </t>
+      <t>
+        A follow-up protocol specification can define: 
+      </t>
+      <ul spacing="normal">
+        <li>canonical Candidate-Act representation and digest calculation;</li>
+        <li>LAVR or equivalent protected-validation-evidence representation;</li>
+        <li>scoped Finality-Authority representation;</li>
+        <li>Finality-Sink processing and verification rules;</li>
+        <li>replay, freshness, revocation, reservation, and consumption semantics;</li>
+        <li>denial and protocol error codes;</li>
+        <li>Finality-Receipt representation;</li>
+        <li>cryptographic algorithm profiles and agility requirements; and</li>
+        <li>transport-specific bindings.</li>
+      </ul>
+      <t>
+        The architectural contribution of this document is therefore not a replacement for existing
+        identity, authorization, attestation, policy, or cryptographic protocols.  It defines an
+        interoperable act-to-effect boundary at which those inputs can be bound to the actual Candidate
+        Act and independently verified before a protected external consequence is permitted to occur.
+      </t>
+      <t>
+        This document defines the architectural model.  Concrete object encodings, cryptographic bindings,
+        processing rules, error semantics, and transport profiles can be specified in separate protocol
+        documents.
+      </t>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>IETF Scope and Non-Goals</name>
+      <t>
+        The protocol mechanism does not determine which jurisdiction's law should prevail, whether any
+        specific international transfer is lawful, or which public or private entity should control a
+        deployment policy.
+      </t>
+      <t>
+        The technical objective is to define interoperable mechanisms by which a deployment-selected
+        policy can be bound to a protected Candidate Act and verified at the relevant Finality Sink
+        before the covered external effect becomes effective.
+      </t>
+      <t>
+        The architecture is intended to remain jurisdiction-neutral and provider-neutral.
+      </t>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>IANA Considerations</name>
+      <t>
+        This document has no IANA actions at this time.
+      </t>
+    </section>
+
+    <section numbered="true" toc="include">
+      <name>Core Proposition</name>
+      <t>
+        The architecture does not claim that data must never leave its originating jurisdiction, that
+        cloud-region labels are inherently unreliable, or that cryptography can prove the physical
+        location of every byte.
+      </t>
+      <t>
+        The narrower technical proposition is:
+      </t>
+      <blockquote>
+        <t>
+          A deployment-defined cross-boundary policy can be made a protected pre-effectuation condition,
+          such that a covered Candidate Act does not become externally effective until the required
+          evidence, authorization, and Finality-Sink predicates have been successfully verified.
+        </t>
+      </blockquote>
+      <t>
+        In compact form:
+      </t>
+      <blockquote>
+        <t>Compute anywhere.  Keep authority independently governed.</t>
+      </blockquote>
+    </section>
+
+  </middle>
+
+  <back>
+    <section numbered="false" toc="include">
+      <name>Acknowledgements</name>
+      <t>
+        Technical review and discussion from the Internet engineering, security, privacy, cloud,
+        telecommunications, distributed-systems, and AI-safety communities are welcomed.
+      </t>
+    </section>
+  </back>
+
+</rfc>
